@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import exception.ExceptionHandler;
 import exception.system.ProtocolDataHandlingException;
 import net.ClientInfo;
+import utils.StringHelper;
 
 
 public class Protocol 
@@ -18,7 +19,7 @@ public class Protocol
 	public Response response = null;
 	
 	public Integer pid = 0;
-	public Integer userId = 0;
+	public String userId = StringHelper.EMPTY_STRING;
 	
 	public Protocol( HttpServletRequest httpRequest, 
 					HttpServletResponse httpResponse ) 
@@ -30,7 +31,7 @@ public class Protocol
 			this.response = new Response( httpResponse, request );	
 	
 			this.pid = (Integer) this.request.get(EProtocol.iPID);
-			this.userId = (Integer) this.request.get(EProtocol.UserID);
+			this.userId = (String) this.request.get(EProtocol.UserID);
 		}
 		catch( ProtocolDataHandlingException e ) 
 		{

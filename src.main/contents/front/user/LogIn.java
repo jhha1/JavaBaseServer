@@ -2,6 +2,7 @@ package contents.front.user;
 
 import org.apache.log4j.Logger;
 import contents.backend.UserManager;
+import contents.backend.UserManager.LogInResultBundle;
 import contents.front.FrontLogic;
 import net.protocol.EProtocol;
 import net.protocol.EResultCode;
@@ -19,35 +20,21 @@ public class LogIn implements FrontLogic {
 		log.debug( this.getClass().getName() + " FrontLogic Called. "
 					+ p.toString());
 
-		Integer userId = ProtocolParamChecker.checkUserID(p.request.get(EProtocol.UserID));
-		
-		log.debug( "1. Id Checked. ");
-		
-		/*
-		 * login
-		 */
-		log.debug( "2. Login process start. ");
-		final UserManager user = UserManager.getInstance();
-		Integer loginResult = user.logIn( userId );
-		if( loginResult == 0 ) {
-			p.setFail(EResultCode.INVALID_USERID, "userID:"+userId);
-			return;
-		} else if ( loginResult == -1 ) {
-			p.setFail(EResultCode.SYSTEM_ERR);
-			return;
-		}
-		
-		log.debug( "3. isAdminUser Start ");
-		boolean bAdminUser = user.isAdminUser(userId);
-		
-		
-		log.debug( "4. sync Start ");
-		
-				
-		
-		p.response.set(EProtocol.UserID, userId);
-		p.response.set(EProtocol.IsAdmin, bAdminUser);
+		Integer platformType = (Integer) p.request.get(EProtocol.PlatformType);
+		String userId = (String) p.request.get(EProtocol.UserID);
 
-		p.setSuccess();
+		
+		log.debug( "Login process start. ");
+		final UserManager user = UserManager.getInstance();
+		LogInResultBundle bundle = user.logIn( platformType, userId );
+		if( bundle.resultCode.isFail() )
+		{
+			p.setFail( bundle.resultCode );
+		}
+		else
+		{
+			p.response.set(EProtocol.UserID, bundle.userID);
+			p.setSuccess();
+		}
 	}
 }

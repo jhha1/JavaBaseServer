@@ -7,10 +7,8 @@ import java.util.Map;
 public enum FAIR__PID_LOGIC 
 {	
 	Dummy ( new Pair(1000, contents.front.Dummy.class) ),
-	User_CheckExist ( new Pair(1001, contents.front.user.CheckExistUser.class) ),
-	User_SignIn ( new Pair(1002, contents.front.user.SignIn.class) ),
-	User_LogIn ( new Pair(1003, contents.front.user.LogIn.class) ),
-	
+	User_LogIn ( new Pair(1001, contents.front.user.LogIn.class) ),
+	User_LogOut ( new Pair(1002, contents.front.user.LogOut.class) ),
 	
 	NULL( new Pair(-1, Class.class) );
 

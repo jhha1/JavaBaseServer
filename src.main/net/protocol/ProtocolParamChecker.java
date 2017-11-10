@@ -61,7 +61,7 @@ public class ProtocolParamChecker
    	 	return checkUserID( (Integer)userId );
    }
 	
-	public static Integer checkUserID( Integer userId ) {
+	public static String checkUserID( String userId ) {
 		if( ! User.checkUserID(userId) ){
 			String reason = "Invalid userId. userId("+userId+")";
 			throw new ProtocolParameterException("CheckFailed. " + reason);
@@ -93,13 +93,7 @@ public class ProtocolParamChecker
 		 return checkUsername((String)username);
 	}
 	
-	public static String checkUsername( String username ){
-		if( ! User.checkUserName(username) ){
-			String reason = "Invalid Username. username("+username+")";
-			throw new ProtocolParameterException("CheckFailed. " + reason);
-		}
-		return username;
-	}
+
 	
 	
 	

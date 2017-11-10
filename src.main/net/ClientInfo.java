@@ -49,8 +49,8 @@ public class ClientInfo
 		}
 		
 		this.pid = reqmap.getOrDefault(EProtocol.PID, "");
-		this.userID = (Integer) reqmap.getOrDefault(EProtocol.UserID, -1);
-		this.userName = (String) reqmap.getOrDefault(EProtocol.UserName, "");
+		this.userID = (String) reqmap.getOrDefault(EProtocol.UserID, -1);
+		this.userName = (String) reqmap.getOrDefault(EProtocol.Nickname, "");
 	}
 	
 	public Object getPID() 

@@ -10,89 +10,104 @@ import utils.StringHelper;
 public class User {
 	final private static Logger log = Logger.getLogger( User.class );
 	
-	public Integer userID = 0;
-	public String userName = null;
-	public Long signin_dt = 0L;
-	private boolean bAdmin = false;
+	private String userId = null;
+	private Integer platformType = -1;
+	private String nickname = null;
+	private long signin_dt = -1;
+	private long login_dt = -1;
+	private long logout_dt = -1;
 	
-
-	private static final int USERNAME_MAX_LEN = 20;
-	public static int USERTYPE_NORMAL = 0; 
-	public static int USERTYPE_ADMIN = 1;
+	//public Long signin_dt = 0L;
+	//private boolean bAdmin = false;
+	
+	public enum PLATFORM_TYPE { GUEST, GOOGLE, FACEBOOK }; 
+	private static final int USERID_MAX_LEN = 20;
+	
 	
 	public static boolean isNull( User user ){
 		if( user == null )
 			return true;
 		
-		if( user.userID == 0 
-				&& user.userName == null )
+		if( user.userId == null 
+				&& user.platformType < 0
+				&& user.nickname == null)
 			return true;
 		
 		return false;
 	}
 	
+    public Integer getPlatformType() {
+        return this.platformType;
+    }
 	
-	public String toString() {
-		return "id("+userID+"), name("+userName+"), signin_dt("+signin_dt+")";
+    public void setPlatformType(Integer platformType) {
+		this.platformType = platformType;
 	}
-	
-	public Integer getUserID() {
-        return this.userID;
-    }
-    public String getUserName() {
-        return this.userName;
-    }
-   
-    public boolean isAdmin() {
-		return bAdmin;
+       
+    public String getUserId() {
+		return userId;
 	}
 
-    public void setAdmin(Integer isAdmin) {
-    	if( isAdmin == USERTYPE_ADMIN )
-    		this.bAdmin = true;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public long getSignin_dt() {
+		return signin_dt;
+	}
+
+	public void setSignin_dt(Long signin_dt) {
+		this.signin_dt = signin_dt;
+	}
+
+	public long getLogout_dt() {
+		return logout_dt;
+	}
+
+	public void setLogout_dt(long logout_dt) {
+		this.logout_dt = logout_dt;
+	}
+
+	public long getLogin_dt() {
+		return login_dt;
+	}
+
+	public void setLogin_dt(long login_dt) {
+		this.login_dt = login_dt;
+	}
+
+
+	public static boolean checkPlatformType( Integer platformType ) {
+    	if( platformType == null )
+    		return false;
+    	
+    	if( platformType == PLATFORM_TYPE.GUEST.ordinal() || 
+    			platformType == PLATFORM_TYPE.GOOGLE.ordinal() || 
+    			platformType == PLATFORM_TYPE.FACEBOOK.ordinal() )
+    		return true;
     	else
-    		this.bAdmin = false;
-	}
-    
-    public static boolean checkUserID( Integer userId ) {
-        if( userId == null || userId < 1 ) {
-            return false;
-        } 
-        return true;
+    		return false;
     }
-
     
-    public static boolean checkUserName( String username ) {
-    	if( StringHelper.isNull(username)){
+    public static boolean checkUserID( String userID ) {
+    	if( StringHelper.isNull(userID)){
              return false;
         }
     	return true;
    }
-    
-    /*
-     *  user name
-     *  영문, 숫자 가능.  
-     *  20자 이내
-     */
-    private static final Pattern patternAlphaNumeric = Pattern.compile("^[a-zA-Z0-9]*$");
-    public static EResultCode checkUserNameDetail( String username ) {
-        if( StringHelper.isNull(username)){
-            log.error("username is null");
-        	return EResultCode.INVALID_USERNAME;
-        }
-        
-        if( username.length() > USERNAME_MAX_LEN ){
-        	log.error("Invalid username length. len("+ username.length() +"), name("+ username +")");
-        	return EResultCode.INVALID_USERNAME_LENGTH;
-        }
-        
-        Matcher m = patternAlphaNumeric.matcher(username);
-        if(false == m.matches()) {
-        	log.error("Invalid username. Only alphanumeric allowed. name("+ username +")");
-        	return EResultCode.INVALID_USERNAME_NONE_ALPHANUMERIC;
-        }
-       
-        return EResultCode.SUCCESS;
-    }
 
+    
+    public String toString() {
+		return "platform("+platformType+")"
+				+ ", userId("+userId+")"
+				+ ", nickname("+nickname+")";
+	}
 }

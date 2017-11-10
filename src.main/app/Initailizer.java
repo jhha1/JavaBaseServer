@@ -12,7 +12,7 @@ public class Initailizer {
 	private static Initailizer instance = new Initailizer();
 	private static Boolean bInitalized = false;
 	
-	static boolean DEBUG_MODE = false; 
+	static boolean DEBUG_MODE = true; 
 	
 	private Initailizer() {}
 	

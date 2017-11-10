@@ -33,7 +33,7 @@ public class PropertiesBundle {
 	
 	private static String getPropertyPath(){
 		if( Initailizer.isDubugMode() )
-			return "F:\\Users\\jhha\\Projects\\Engquiz\\engquiz_server\\properties.xml";
+			return "D:\\Users\\jhha\\Projects\\FQueen\\Servers\\GameProject1_Server\\properties.xml";
 		else 
 			return "/home/tomcat/properties/properties.xml";
 	}

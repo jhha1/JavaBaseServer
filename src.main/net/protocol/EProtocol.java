@@ -11,6 +11,7 @@ public enum EProtocol {
 	PID ("pid"),	// string
 	iPID ("iPID"),  // integer 
 	sPID ("sPID"),  // pid name
+	DeviceID ("DeviceId"),
 	
 	// Response Only 
 	CODE("code"),
@@ -19,36 +20,9 @@ public enum EProtocol {
 	
 	// user
 	UserID ("UserID"),
-	UserName("UserName"),
-	IsExistedUser("IsExistedUser"),
-	IsAdmin ("IsAdmin"),
+	PlatformType ("PlatformType"),
+	Nickname("Nickname"),
 	
-	// Script
-	ScriptId("ScriptId"),
-	ScriptIds("ScriptIds"),
-	ScriptTitle("title"),
-	ScriptSentences("sentences"),
-	ParsedSciprt("parsedScript"),
-	SciprtPDF("scriptPDF"),
-	SciprtDOCX("scriptDocx"),
-	
-	// Sentence
-	SentenceId("SentenceId"),
-	Revision("Revision"),
-	SentenceKo("SenteceKo"),
-	SentenceEn("SenteceEn"),
-	
-	// Sync
-	SyncResult("SyncResult"),
-	SYNC__NEED_SENTENCE_ADD("SYNC__NEED_SENTENCE_ADD"),
-	SYNC__NEED_SENTENCE_DEL("SYNC__NEED_SENTENCE_DEL"),
-	SYNC__NEED_SENTENCE_UPDATE("SYNC__NEED_SENTENCE_UPDATE"),
-	
-	
-	// Report
-	ReportCountAll("ReportCountAll"),
-	ReportList("ReportList"),
-	ReportModifyType("ReportModifyType"),
 	
 	// for test
 	TEST("test"),
